@@ -1,24 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;//新增UI程式庫
-using UnityEngine.SceneManagement;//新增場景資料庫
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class Menu : MonoBehaviour
 {
-    [Header("首頁")]
+    [Header("")]
     public GameObject MenuPage;
     
-    [Header("設定")]
+    [Header("砞﹚")]
     public GameObject SettingPage;
 
-    [Header("讀檔")]
+    [Header("弄郎")]
     public GameObject LoadPage;
 
-    [Header("控制音量Slider")]
+    [Header("羘")]
     public Slider VoiceSlider;
 
+    [Header("秆猂")]
+    public Dropdown GameSizeDropdown;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,28 +35,41 @@ public class Menu : MonoBehaviour
 
     public void ToMovie()
     {
-        
-        Application.LoadLevel("Movie");//切換場景"Movie"場景
+        Application.LoadLevel("Movie");//笆礶初春
     }
     public void Quit()
     {
-        Application.Quit();//關閉程式
+        Application.Quit();//瞒秨
     }
     public void Setting(bool Set)
-    {   //設定按鈕開關
-        MenuPage.SetActive(Set);//Set 值為true
-        SettingPage.SetActive(!Set);//!Set 值為false
+    {  
+        MenuPage.SetActive(Set);
+        SettingPage.SetActive(!Set);
     }
     public void SetLoading(bool Set)
-    {   //讀檔按鈕開關
-        MenuPage.SetActive(Set);//Set 值為true
-        LoadPage.SetActive(!Set);//!Set 值為false
+    {   
+        MenuPage.SetActive(Set);
+        LoadPage.SetActive(!Set);
     }
-    public void SetVoice()//設定按鈕開關
+    public void SetVoice()
     {
-        //調整整體音量，值介於0~1之間
         AudioListener.volume = VoiceSlider.value;
+        SaveDate.SaveVolume = AudioListener.volume;
     }
-
+    public void SetGameSize()//秆猂匡拒
+    {
+        if (GameSizeDropdown.value == 0)
+        {
+            Screen.SetResolution(1920, 1080, false);
+        }
+        if (GameSizeDropdown.value == 1)
+        {
+            Screen.SetResolution(1280, 720, false);
+        }
+        if (GameSizeDropdown.value == 2)
+        {
+            Screen.SetResolution(800, 480, false);
+        }
+    }
 
 }
