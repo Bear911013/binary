@@ -22,12 +22,13 @@ public class MovieGM : MonoBehaviour
     {
         NowTime += Time.deltaTime;
         if(!Movie.isPlaying&& NowTime> SetTime)
-        {
+        {   
             ToGame();
         }
+        //設定影片需要幾秒才能跳過
 }
     public void ToGame()
     {
-        Application.LoadLevel("Game");
+        Application.LoadLevel("SampleScene");
     }
 }

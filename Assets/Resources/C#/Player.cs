@@ -17,14 +17,18 @@ public class Player : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        //控制玩家位移上下左右
-        transform.Translate(Input.GetAxis("Horizontal") * Speed, Input.GetAxis("Vertical") * Speed, 0);
-
-        if (Input.GetKeyDown(KeyCode.Space))
+    { //rb.AddForce(x,y),Vector2.up=(0,1),Vector2.down=(0,-1),Vector2.left=(-1,0),
+        if (Input.GetKeyDown(KeyCode.W))
         {
-            //rb.AddForce(x,y),Vector2.up=(0,1),Vector2.down=(0,-1),Vector2.left=(-1,0),
             rb.AddForce(Vector2.up * jumpAmount, ForceMode2D.Impulse);
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            gameObject.transform.position += new Vector3(-Speed * Time.deltaTime, 0, 0);
+        }
+            if (Input.GetKey(KeyCode.D))
+        {
+            gameObject.transform.position += new Vector3(Speed* Time.deltaTime, 0, 0);
         }
     }
 }
