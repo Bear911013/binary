@@ -39,7 +39,7 @@ public class Player2 : MonoBehaviour
             rb.AddForce(Vector2.up * jumpAmount, ForceMode2D.Impulse);
             P2_animator.SetBool("Jump",true);
             x ++;
-            if (x == 3)
+            if (x == 1)
             {
                 isWait = true;
             }
@@ -92,9 +92,9 @@ public class Player2 : MonoBehaviour
             transform.position = new Vector3(14.2f, transform.position.y, 0);
         }
 
-        if (transform.position.x < -30.8f)
+        if (transform.position.x < -4.8f)
         {
-            transform.position = new Vector3(-30.8f, transform.position.y, 0);
+            transform.position = new Vector3(-4.8f, transform.position.y, 0);
         }
 
 

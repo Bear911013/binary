@@ -10,10 +10,10 @@ public class Player : MonoBehaviour
     public float jumpAmount = 35f;
 
     [Header("跳躍限制")]
-    private int maxComboCount = 2;
-    public float waitTime=2f;
-    private int currentComboCount = 0;
-    private float timer=0f;
+    private int x = 0;
+    public float waitTime = 2f;
+    private float timer = 0f;
+    private bool isWait = false;
 
     private Animator P1_animator;
 
@@ -33,22 +33,25 @@ public class Player : MonoBehaviour
             P1_animator.SetBool("Run2", false);
             P1_animator.SetBool("Walk", false);
             P1_animator.SetBool("Walk2", false);
-        if (Input.GetKeyDown(KeyCode.W))
+        if (!isWait && Input.GetKeyDown(KeyCode.W))
         {
-            if (Time.time - timer > waitTime)
+            rb.AddForce(Vector2.up * jumpAmount, ForceMode2D.Impulse);
+            P1_animator.SetBool("Jump", true);
+            x++;
+            if (x == 1)
             {
-                // 如果超過了等待时間，重置技能
-                currentComboCount = 1;
+                isWait = true;
             }
-            else
+        }
+        if (isWait)
+        {
+            timer += Time.deltaTime;
+            if (timer >= waitTime)
             {
-                // 如果在等待时間内，增加連擊數
-                currentComboCount = Mathf.Clamp(currentComboCount + 1, 1, maxComboCount);
+                timer = 0f;
+                x = 0;
+                isWait = false;
             }
-
-            // 執行技能
-            ExecuteComboSkill(currentComboCount);
-            timer = Time.time;
         }
         if (Input.GetKey(KeyCode.A))
         {
@@ -88,30 +91,12 @@ public class Player : MonoBehaviour
             transform.position = new Vector3(14.2f, transform.position.y, 0);
         }
 
-        if (transform.position.x < -30.8f)
+        if (transform.position.x < -4.8f)
         {
-            transform.position = new Vector3(-30.8f, transform.position.y, 0);
+            transform.position = new Vector3(-4.8f, transform.position.y, 0);
         }
 
 
     }
-    void ExecuteComboSkill(int comboCount)
-    {
-        // 根据當前連擊數執行不同的技能
-        switch (comboCount)
-        {
-            case 1:
-                Debug.Log("第一段技能");
-                rb.AddForce(Vector2.up * jumpAmount, ForceMode2D.Impulse);
-                P1_animator.SetBool("Jump", true);
-                break;
-            case 2:
-                Debug.Log("第二段技能");
-                rb.AddForce(Vector2.up * jumpAmount, ForceMode2D.Impulse);
-                P1_animator.SetBool("Jump", true);
-                break;
-            default:
-                break;
-        }
-    }
+    
 }
