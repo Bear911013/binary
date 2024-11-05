@@ -3,7 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Human
+  - Goat
+  - Box
+  - Ele
+  - BOX
+  - Player2
+  - Ele2
+  - GoatS
   layers:
   - Default
   - TransparentFX

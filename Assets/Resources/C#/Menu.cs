@@ -45,10 +45,15 @@ public class Menu : MonoBehaviour
     {
         Application.Quit();//Â÷¶}
     }
-    public void Setting(bool Set)
-    {  
-        MenuPage.SetActive(Set);
-        SettingPage.SetActive(!Set);
+    public void Setting()
+    {
+        MenuPage.SetActive(true);
+        SettingPage.SetActive(true);
+    }
+    public void SettingExit()
+    {
+        MenuPage.SetActive(true);
+        SettingPage.SetActive(false);
     }
     public void SetLoading(bool Set)
     {   
