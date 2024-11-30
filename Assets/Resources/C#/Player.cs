@@ -88,22 +88,22 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             gameObject.transform.position += new Vector3(-Speed * Time.deltaTime, 0, 0);
-            P1_animator.SetBool("Walk", true);
+            /*P1_animator.SetBool("Walk", true);
             if (Input.GetKeyDown(KeyCode.W))
             {
                 P1_animator.SetBool("Jump", true);
-            }
+            }*/
         }
 
         if (Input.GetKey(KeyCode.D))
         {
             gameObject.transform.position += new Vector3(Speed * Time.deltaTime, 0, 0);
-            P1_animator.SetBool("Walk2", true);
+            /*P1_animator.SetBool("Walk2", true);
             if (Input.GetKeyDown(KeyCode.W))
             {
                 P1_animator.SetBool("Jump", false);
                 P1_animator.SetBool("Jump2", true);
-            }
+            }*/
         }
 
         if (transform.position.x > 36f)
