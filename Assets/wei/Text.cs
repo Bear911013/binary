@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Text : MonoBehaviour
 {
+    internal Font font;
+
+    public int fontSize { get; internal set; }
+    public TextAnchor alignment { get; internal set; }
+    public string text { get; internal set; }
+
     void Awake()//初始狀態，程式開啟必執行一次
     {
         Debug.Log("Hello");
