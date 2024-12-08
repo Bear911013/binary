@@ -17,6 +17,9 @@ public class newLevel1 : MonoBehaviour
     public GameObject Run;
 
     public GameObject P2;
+    public GameObject IdleP2;
+    public GameObject WalkP2;
+    public GameObject RunP2;
 
     public float P1Run = 0.08f;
     public GameObject GoatR;
@@ -30,9 +33,13 @@ public class newLevel1 : MonoBehaviour
 
     public GameObject CamaraMain;
     public GameObject Camara;
-    
+    public GameObject Camara2;
+
     public bool L1;
+    public GameObject L11;
     public bool L2;
+    public GameObject L21;
+    public GameObject L22;
     // Start is called before the first frame update
     void Start()
     {
@@ -70,16 +77,17 @@ public class newLevel1 : MonoBehaviour
         {
             Run.GetComponent<SpriteRenderer>().flipX = false;
             Time.timeScale = 0f;
+            L11.SetActive(true);
             Talk.SetActive(true);
             TalkP1.SetActive(true);
             TalkP2.SetActive(false);
-            if (Input.GetKey(KeyCode.D))
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
             {
                 Run.GetComponent<SpriteRenderer>().flipX = true;
                 Idle.SetActive(false);
                 Walk.SetActive(true);
                 Run.SetActive(false);
-                Time.timeScale = 0.5f;
+                Time.timeScale = 0.2f;
                 if (Input.GetKey(KeyCode.D)&& Input.GetKey(KeyCode.LeftShift))
                 {
                     L1 = true;
@@ -89,7 +97,22 @@ public class newLevel1 : MonoBehaviour
                     TalkP2.SetActive(false);
                     Camara.SetActive(false);
                     CamaraMain.SetActive(true);
+                    L11.SetActive(false);
                 }
+            }
+        }
+        if(L1 == true)
+        {
+
+            // ­­¨î P1 ªº½d³ò
+            if (P1.transform.position.x <= P2.transform.position.x - 0.314f)
+            {
+                P1.transform.position = new Vector3(P2.transform.position.x - 0.314f, P1.transform.position.y, P1.transform.position.z);
+            }
+            if (P1.transform.position.x >= P2.transform.position.x + 0.27797f)
+            {
+                P1.transform.position = new Vector3(P2.transform.position.x + 0.27797f, P1.transform.position.y, P1.transform.position.z);
+              
             }
         }
         
@@ -98,22 +121,49 @@ public class newLevel1 : MonoBehaviour
         if (P1.transform.position.x >= -14.68f && L1 == true &&L2==false)
         {
             P2.transform.position += new Vector3(-P1Run * Time.deltaTime, 0, 0);
-            if(P2.transform.position.x<= -14.518f && L1 == true && L2 == false)
+            IdleP2.SetActive(false);
+            WalkP2.SetActive(false);
+            RunP2.SetActive(true);
+            if (P2.transform.position.x <= -14.4f && L1 == true && L2 == false)
             {
                 Time.timeScale = 0f;
-                Talk2.SetActive(true);
+                Camara2.SetActive(true);
+                CamaraMain.SetActive(false);
                 TalkP1.SetActive(false);
                 TalkP2.SetActive(true);
-                if (Input.GetKey(KeyCode.Return))
+                L21.SetActive(true);
+                if (Input.GetKeyDown(KeyCode.LeftArrow))
                 {
                     Talk2.SetActive(false);
-                    TalkP2.SetActive(true);
                     Talk3.SetActive(true);
-                    Time.timeScale = 1f;
-                    L2 = true;
                 }
-                
+                if (Input.GetKey(KeyCode.LeftArrow))
+                {
+                    Time.timeScale = 1f;
+                    L21.SetActive(false);
+                    RunP2.SetActive(false);
+                }
+                if (P2.transform.position.x <= -14.45f && L1 == true && L2 == false)
+                {
+                    Camara2.transform.position = new Vector3(-14.508f, Camara2.transform.position.y,Camara2.transform.position.z);
+                }
+                if (P2.transform.position.x <= -14.518f && L1 == true && L2 == false)
+                {
+                    L21.SetActive(false);
+                    Time.timeScale = 0f;
+                    L22.SetActive(true);
+                    if (Input.GetKey(KeyCode.Return))
+                    {
+                        Time.timeScale = 1f;
+                        L2 = true;
+                        Camara2.SetActive(false);
+                        CamaraMain.SetActive(true);
+                        L22.SetActive(false);
+                    }
+
+                }
             }
+                
         }
         if (Input.GetKeyUp(KeyCode.Return))
         {

@@ -14,6 +14,10 @@ public class P2 : MonoBehaviour
     public GameObject Run;
 
     public GameObject Light;
+
+    public GameObject GroundW;
+    public GameObject GroundWe;
+    public GameObject GroundE;
     // Start is called before the first frame update
     void Start()
     {
@@ -91,6 +95,7 @@ public class P2 : MonoBehaviour
                 Walk.SetActive(false);
                 Run.SetActive(false);
                 Light.SetActive(true);
+                gameObject.SetActive(false);
             }
             else
             {
@@ -99,6 +104,39 @@ public class P2 : MonoBehaviour
                 Walk.SetActive(false);
                 Run.SetActive(false);
                 Light.SetActive(false);
+            }
+        }
+        if (other.gameObject.CompareTag("GroundW"))
+        {
+            Debug.Log("我碰到斜坡了");
+            if (GroundWe != null)
+            {
+                GroundWe.SetActive(true);
+            }
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                GroundW.SetActive(true);
+                GroundE.SetActive(true);
+            }
+        }
+        if (other.gameObject.CompareTag("GroundE"))
+        {
+            Debug.Log("我離開斜坡了");
+            if (GroundWe != null)
+            {
+                GroundW.SetActive(false);
+                GroundE.SetActive(false);
+            }
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("GroundW"))
+        {
+            Debug.Log("我離開斜坡了");
+            if (GroundWe != null)
+            {
+                GroundWe.SetActive(false);
             }
         }
     }

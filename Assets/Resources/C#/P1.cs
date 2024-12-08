@@ -13,6 +13,7 @@ public class P1 : MonoBehaviour
     public GameObject Walk;
     public GameObject Run;
     public GameObject Died;
+    public GameObject Sharder;
 
     //角色位置
     private Vector3 Position;
@@ -28,6 +29,11 @@ public class P1 : MonoBehaviour
 
     private bool Spacearrow = false;
     private bool iswait = false;
+
+    //斜坡
+    public GameObject GroundW;
+    public GameObject GroundWe;
+    public GameObject GroundE;
 
     //彈開力度
     public float bounceForce = 10f;
@@ -122,10 +128,11 @@ public class P1 : MonoBehaviour
             {
                     //角色觸發器打開
                     GetComponent<Collider>().isTrigger = true;
-                    // 停止物體的重力影響
-                    rb.isKinematic = true;
-                    Debug.Log("碰到P2，觸發器開啟，關重力");
+                // 停止物體的重力影響
+                rb.isKinematic = true;
+                Debug.Log("碰到P2，觸發器開啟，關重力");
                     Spacearrow = true;
+                Sharder.SetActive(true);
 
             }
             else if (Spacearrow == true && GetComponent<Collider>().isTrigger && rb.isKinematic)
@@ -134,6 +141,7 @@ public class P1 : MonoBehaviour
                 GetComponent<Collider>().isTrigger = false;
                 rb.isKinematic = false;
                 Spacearrow = false ;
+                Sharder.SetActive(false);
             }
 
         }
@@ -256,5 +264,106 @@ public class P1 : MonoBehaviour
             }
         }
     }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        // 檢查碰撞物體的 Tag 是否為 "Ground"
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            Debug.Log("我碰到地板了");
+            if (Sharder != null)
+            {
+                Sharder.SetActive(true);
+            }
+
+        }
+    }
+    
+
+        private void OnCollisionExit(Collision collision)
+    {
+        // 檢查碰撞物體的 Tag 是否為 "Ground"
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            Debug.Log("我離開地板了");
+            if (Sharder != null)
+            {
+                Sharder.SetActive(false);
+            }
+        }
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("GroundW"))
+        {
+            Debug.Log("我碰到斜坡了");
+            if (GroundWe != null)
+            {
+                GroundWe.SetActive(true);
+            }
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                GroundW.SetActive(true);
+                GroundE.SetActive(true);
+            }
+        }
+        if (other.gameObject.CompareTag("GroundE"))
+        {
+            Debug.Log("我離開斜坡了");
+            if (GroundWe != null)
+            {
+                GroundW.SetActive(false);
+                GroundE.SetActive(false);
+            }
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("GroundW"))
+        {
+            Debug.Log("我離開斜坡了");
+            if (GroundWe != null)
+            {
+                GroundWe.SetActive(false);
+            }
+        }
+    }
+    void FixedUpdate() // 使用 FixedUpdate 處理物理運算
+    {
+        // 檢測角色腳下的地面
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 1.1f)) // 根據角色的高度調整檢測距離
+        {
+            Vector3 groundNormal = hit.normal; // 獲取地面的法線
+            Vector3 slopeDirection = Vector3.Cross(Vector3.Cross(Vector3.up, groundNormal), groundNormal); // 計算沿斜坡方向的移動向量
+
+            if (Input.GetKey(KeyCode.A))
+            {
+                Vector3 moveDirection = slopeDirection * -Speed * Time.deltaTime;
+                rb.MovePosition(transform.position + moveDirection); // 沿斜坡方向移動
+                WalkAnimation(false); // 左移動畫
+            }
+
+            if (Input.GetKey(KeyCode.D))
+            {
+                Vector3 moveDirection = slopeDirection * Speed * Time.deltaTime;
+                rb.MovePosition(transform.position + moveDirection); // 沿斜坡方向移動
+                WalkAnimation(true); // 右移動畫
+            }
+        }
+    }
+
+    // 新增的動畫函式
+    void WalkAnimation(bool isRight)
+    {
+        Idle.SetActive(false);
+        Walk.SetActive(true);
+        Run.SetActive(Input.GetKey(KeyCode.LeftShift));
+        Walk.GetComponent<SpriteRenderer>().flipX = !isRight;
+    }
+
+
+
+
 }
 

@@ -14,6 +14,10 @@ public class Ele : MonoBehaviour
     void Update()
     {
         P2Position = P2.transform.position;
+        if (Input.GetKeyUp(KeyCode.Return))
+        {
+            P2.SetActive(true);
+        }
     }
     private void OnTriggerStay(Collider other)
     {

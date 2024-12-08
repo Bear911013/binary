@@ -12,6 +12,9 @@ TagManager:
   - Player2
   - Ele2
   - GoatS
+  - Ground
+  - GroundW
+  - GroundE
   layers:
   - Default
   - TransparentFX

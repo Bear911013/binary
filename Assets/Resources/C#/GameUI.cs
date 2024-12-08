@@ -23,6 +23,7 @@ public class GameUI : MonoBehaviour
     public void Stopting()
     {
         StopPage.SetActive(true);
+        Time.timeScale = 0f;
     }
     public void Setting()
     {
@@ -30,6 +31,7 @@ public class GameUI : MonoBehaviour
     }
     public void SettingExit()
     {
+        Time.timeScale = 1f;
         SetPage.SetActive(false);
         StopPage.SetActive(false);
     }
@@ -37,4 +39,5 @@ public class GameUI : MonoBehaviour
     {
         Application.LoadLevel("Menu");//到動畫場景
     }
+
 }
