@@ -122,8 +122,8 @@ public class newLevel1 : MonoBehaviour
         {
             P2.transform.position += new Vector3(-P1Run * Time.deltaTime, 0, 0);
             IdleP2.SetActive(false);
-            WalkP2.SetActive(false);
-            RunP2.SetActive(true);
+            WalkP2.SetActive(true);
+            RunP2.SetActive(false);
             if (P2.transform.position.x <= -14.4f && L1 == true && L2 == false)
             {
                 Time.timeScale = 0f;
