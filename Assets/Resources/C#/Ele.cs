@@ -6,6 +6,8 @@ public class Ele : MonoBehaviour
     public GameObject P2; // 子物件 Ele2
     private Vector3 P2Position; // Ele2 的初始位置
 
+    public GameObject Light;
+
     void Start()
     {
         
@@ -24,16 +26,18 @@ public class Ele : MonoBehaviour
         // 檢查碰到的物體是否有 Tag "G"
         if (other.CompareTag("Player2"))
         {
-            Debug.Log("碰到P2");
             if (Input.GetKey(KeyCode.Return))
             {
                 P2Position.x = gameObject.transform.position.x;
                 P2.transform.position = P2Position;
 
+                Light.SetActive(true);
+
             }
             else
             {
-                Debug.Log("放開Enter");
+
+                Light.SetActive(false);
             }
         }
     }

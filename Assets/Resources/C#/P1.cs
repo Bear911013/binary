@@ -30,10 +30,10 @@ public class P1 : MonoBehaviour
     private bool Spacearrow = false;
     private bool iswait = false;
 
+    public GameObject L3;
+
     //斜坡
-    public GameObject GroundW;
     public GameObject GroundWe;
-    public GameObject GroundE;
 
     //彈開力度
     public float bounceForce = 10f;
@@ -130,14 +130,12 @@ public class P1 : MonoBehaviour
                     GetComponent<Collider>().isTrigger = true;
                 // 停止物體的重力影響
                 rb.isKinematic = true;
-                Debug.Log("碰到P2，觸發器開啟，關重力");
                     Spacearrow = true;
                 Sharder.SetActive(true);
 
             }
             else if (Spacearrow == true && GetComponent<Collider>().isTrigger && rb.isKinematic)
             {
-                Debug.Log("離開P2，恢復正常");
                 GetComponent<Collider>().isTrigger = false;
                 rb.isKinematic = false;
                 Spacearrow = false ;
@@ -149,12 +147,10 @@ public class P1 : MonoBehaviour
         if (Input.GetKey(KeyCode.Space))
         {
             A = X;
-            Debug.Log("硬控角色");
             gameObject.transform.position = Position;
             pressTime += Time.deltaTime;
             if (pressTime >= passtime )
             {
-                Debug.Log("按下空白兩秒");
                 bounceForce = 0;
                 if (Idle != null && Walk != null && Run != null) // 確保 Idle 物件已經被賦值
                 {
@@ -183,7 +179,6 @@ public class P1 : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Space) && !iswait)
         {
             pressTime = 0;
-            Debug.Log("放開空白鍵");
             iswait = true;
             Time.timeScale = 1f;
             Die.SetActive(false);
@@ -209,7 +204,6 @@ public class P1 : MonoBehaviour
     {
         if (iswait == true)
         {
-            Debug.Log("等待兩秒後恢復初始狀態");
             bounceForce = ABO;
             if (Idle != null && Walk != null && Run != null) // 確保 Idle 物件已經被賦值
             {
@@ -232,7 +226,8 @@ public class P1 : MonoBehaviour
                 idleRenderer.material.color = Color1;
                 walkRenderer.material.color = Color2;
                 runRenderer.material.color = Color3;
-            }
+
+}
             X = A;
         }
         iswait = false;
@@ -270,7 +265,6 @@ public class P1 : MonoBehaviour
         // 檢查碰撞物體的 Tag 是否為 "Ground"
         if (collision.gameObject.CompareTag("Ground"))
         {
-            Debug.Log("我碰到地板了");
             if (Sharder != null)
             {
                 Sharder.SetActive(true);
@@ -285,7 +279,6 @@ public class P1 : MonoBehaviour
         // 檢查碰撞物體的 Tag 是否為 "Ground"
         if (collision.gameObject.CompareTag("Ground"))
         {
-            Debug.Log("我離開地板了");
             if (Sharder != null)
             {
                 Sharder.SetActive(false);
@@ -296,32 +289,17 @@ public class P1 : MonoBehaviour
     {
         if (other.gameObject.CompareTag("GroundW"))
         {
-            Debug.Log("我碰到斜坡了");
             if (GroundWe != null)
             {
                 GroundWe.SetActive(true);
             }
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                GroundW.SetActive(true);
-                GroundE.SetActive(true);
-            }
         }
-        if (other.gameObject.CompareTag("GroundE"))
-        {
-            Debug.Log("我離開斜坡了");
-            if (GroundWe != null)
-            {
-                GroundW.SetActive(false);
-                GroundE.SetActive(false);
-            }
-        }
+        
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("GroundW"))
         {
-            Debug.Log("我離開斜坡了");
             if (GroundWe != null)
             {
                 GroundWe.SetActive(false);

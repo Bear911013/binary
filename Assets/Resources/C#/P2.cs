@@ -13,14 +13,14 @@ public class P2 : MonoBehaviour
     public GameObject Walk;
     public GameObject Run;
 
-    public GameObject Light;
-
-    public GameObject GroundW;
     public GameObject GroundWe;
-    public GameObject GroundE;
+    public GameObject Enter;
+    public GameObject Ground;
+
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1f;
         transform.Rotate(0f, 0f, 0f);
         Idle.SetActive(true);
         Walk.SetActive(false);
@@ -88,52 +88,52 @@ public class P2 : MonoBehaviour
         // 檢查碰到的物體是否有 Tag "G"
         if (other.CompareTag("Ele"))
         {
-            Debug.Log("碰到有電物品");
+            if (Enter != null)
+            {
+                Enter.SetActive(true);
+            }
             if (Input.GetKey(KeyCode.Return))
             {
                 Idle.SetActive(false);
                 Walk.SetActive(false);
                 Run.SetActive(false);
-                Light.SetActive(true);
                 gameObject.SetActive(false);
             }
             else
             {
-                Debug.Log("放開Enter");
                 Idle.SetActive(true);
                 Walk.SetActive(false);
                 Run.SetActive(false);
-                Light.SetActive(false);
             }
         }
-        if (other.gameObject.CompareTag("GroundW"))
+        
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("ladder"))
         {
-            Debug.Log("我碰到斜坡了");
+            Debug.Log("我碰到梯子了");
             if (GroundWe != null)
             {
                 GroundWe.SetActive(true);
             }
-            if (Input.GetKeyDown(KeyCode.UpArrow))
-            {
-                GroundW.SetActive(true);
-                GroundE.SetActive(true);
-            }
-        }
-        if (other.gameObject.CompareTag("GroundE"))
-        {
-            Debug.Log("我離開斜坡了");
-            if (GroundWe != null)
-            {
-                GroundW.SetActive(false);
-                GroundE.SetActive(false);
-            }
         }
     }
-    private void OnTriggerExit(Collider other)
+
+        private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("GroundW"))
+        if (other.gameObject.CompareTag("Ele"))
         {
-            Debug.Log("我離開斜坡了");
+            Debug.Log("我離開梯子了");
+            if (Enter != null)
+            {
+                Enter.SetActive(false);
+            }
+            
+        }
+        if (other.gameObject.CompareTag("ladder"))
+        {
+            Debug.Log("我離開梯子了");
             if (GroundWe != null)
             {
                 GroundWe.SetActive(false);

@@ -15,6 +15,7 @@ TagManager:
   - Ground
   - GroundW
   - GroundE
+  - ladder
   layers:
   - Default
   - TransparentFX
