@@ -7,7 +7,7 @@ ScriptedImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-  script: {instanceID: 0}
+  script: {fileID: 11500000, guid: b2a9591990af98743ba3ff7cf1000886, type: 3}
   textureImporterSettings:
     alphaSource: 1
     mipMapMode: 0
@@ -102,7 +102,7 @@ ScriptedImporter:
       y: 4
       width: 69
       height: 142
-    spriteID: 16c52c062bd77434cadcd4e0bfac1376
+    spriteID: 1f17da7cbc9633343b9d303891a3bece
     internalID: 0
     spriteBone: []
     spriteOutline: []
@@ -124,7 +124,7 @@ ScriptedImporter:
       y: 4
       width: 69
       height: 142
-    spriteID: 6ce63fbe002dc0f4a9e6a515a5d38fbc
+    spriteID: 71697c992ff9d884ea2ff328dbda763c
     internalID: 0
     spriteBone: []
     spriteOutline: []
@@ -146,7 +146,7 @@ ScriptedImporter:
       y: 4
       width: 2526
       height: 648
-    spriteID: c97afee3f7ab54c4aaf799b6e5df6727
+    spriteID: fd7bf47c93f14ef4ca58893a2ce01971
     internalID: 0
     spriteBone: []
     spriteOutline: []
@@ -180,21 +180,21 @@ ScriptedImporter:
     spriteName: "\u5716\u5C64 2"
     isGroup: 0
     parentIndex: -1
-    spriteID: 16c52c062bd77434cadcd4e0bfac1376
+    spriteID: 1f17da7cbc9633343b9d303891a3bece
     layerID: 5
     mosaicPosition: {x: 2538, y: 4}
   - name: "\u5716\u5C64 1"
     spriteName: "\u5716\u5C64 1"
     isGroup: 0
     parentIndex: -1
-    spriteID: 6ce63fbe002dc0f4a9e6a515a5d38fbc
+    spriteID: 71697c992ff9d884ea2ff328dbda763c
     layerID: 4
     mosaicPosition: {x: 2615, y: 4}
   - name: "\u80CC\u666F"
     spriteName: "\u80CC\u666F"
     isGroup: 0
     parentIndex: -1
-    spriteID: c97afee3f7ab54c4aaf799b6e5df6727
+    spriteID: fd7bf47c93f14ef4ca58893a2ce01971
     layerID: 1
     mosaicPosition: {x: 4, y: 4}
   characterData:

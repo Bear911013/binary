@@ -39,5 +39,9 @@ public class GameUI : MonoBehaviour
     {
         Application.LoadLevel("Menu");//到動畫場景
     }
+    public void ToMovie2()
+    {
+        Application.LoadLevel("Movie2");
+    }
 
 }

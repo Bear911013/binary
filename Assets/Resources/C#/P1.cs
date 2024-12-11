@@ -50,6 +50,7 @@ public class P1 : MonoBehaviour
     private float Dietime = 0f;
     public float Dietimer = 2.0f;
     public GameObject Fill;
+    public GameObject Suscess;
 
     // Start is called before the first frame update
     void Start()
@@ -198,7 +199,11 @@ public class P1 : MonoBehaviour
                 Fill.SetActive(true);
             }
         }
-
+        if(gameObject.transform.position.x>= -11.07983f&& P2.transform.position.x >= -11.10086f)
+        {
+            Die.SetActive(true);
+            Suscess.SetActive(true);
+        }
     }
     private void ResetState()
     {

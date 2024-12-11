@@ -236,8 +236,15 @@ public class newLevel1 : MonoBehaviour
         }
         if (L2 == true && L3 == false)
         {
-            L31.SetActive(true);
-            if(P1.transform.position.x < P2.transform.position.x + 0.016f && P1.transform.position.x > P2.transform.position.x - 0.016f && P1.transform.position.y > P2.transform.position.y - 0.01f && P1.transform.position.y < P2.transform.position.y + 0.01f)
+            if (P1.transform.position.x < P2.transform.position.x + 0.0455f && P1.transform.position.x > P2.transform.position.x - 0.0455f)
+            {
+                L31.SetActive(true);
+            }
+            else
+            {
+                L31.SetActive(false);
+            }
+                if (P1.transform.position.x < P2.transform.position.x + 0.016f && P1.transform.position.x > P2.transform.position.x - 0.016f && P1.transform.position.y > P2.transform.position.y - 0.01f && P1.transform.position.y < P2.transform.position.y + 0.01f)
             {
                 L32.SetActive(true);
                 if (Input.GetKeyUp(KeyCode.Space)&& a == 0)
