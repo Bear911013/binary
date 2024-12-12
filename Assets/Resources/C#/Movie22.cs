@@ -28,6 +28,6 @@ public class Movie22 : MonoBehaviour
     }
     public void ToGame()
     {
-        Application.LoadLevel("Mean");
+        Application.LoadLevel("Menu");
     }
 }
